@@ -81,15 +81,71 @@ exports.statusCode = {
   /**
    * The 101 (Switching Protocols) status code indicates that the server
    * understands and is willing to comply with the client's request, via
-   * the Upgrade header field, for a change in the application protocol 
-   * being used on this connection.  The server MUST generate an Upgrade 
-   * header field in the response that indicates which protocol(s) will be 
-   * switched to immediately after the empty line that terminates the 101 response.
+   * the Upgrade header field, for a change in the application protocol
+   * being used on this connection.
+   *
+   * The server MUST generate an Upgrade header field in the response
+   * that indicates which protocol(s) will be switched to immediately after
+   * the empty line that terminates the 101 response.
+   *
+   * It is assumed that the server will only agree to switch protocols
+   * when it is advantageous to do so.  For example, switching to a newer
+   * version of HTTP might be advantageous over older versions, and
+   * switching to a real-time, synchronous protocol might be advantageous
+   * when delivering resources that use such features.
    * @returns 101
    * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.2.2
    */
   SWITCHING_PROTOCOLS: 101,
+
+  /**
+   * The 200 (OK) status code indicates that the request has succeeded.
+   * The payload sent in a 200 response depends on the request method.
+   * For the methods defined by this specification, the intended meaning
+   * of the payload can be summarized as:
+   *
+   *   GET  a representation of the target resource;
+   *
+   *   HEAD  the same representation as GET, but without the representation data;
+   *
+   *   POST  a representation of the status of, or results obtained from, the action;
+   *
+   *   PUT, DELETE  a representation of the status of the action;
+   *
+   *   OPTIONS  a representation of the communications options;
+   *
+   *   TRACE  a representation of the request message as received by the end server.
+   *
+   * Aside from responses to CONNECT, a 200 response always has a payload,
+   * though an origin server MAY generate a payload body of zero length.
+   * If no payload is desired, an origin server ought to send 204 (No Content)
+   * instead.  For CONNECT, no payload is allowed because the
+   * successful result is a tunnel, which begins immediately after the 200
+   * response header section.
+   *
+   * A 200 response is cacheable by default; i.e., unless otherwise
+   * indicated by the method definition or explicit cache controls
+   *
+   * @returns 200
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.3.1
+   */
   OK: 200,
+
+  /**
+   * The 201 (Created) status code indicates that the request has been
+   * fulfilled and has resulted in one or more new resources being
+   * created.  The primary resource created by the request is identified
+   * by either a Location header field in the response or, if no Location
+   * field is received, by the effective request URI.
+   * 
+   * The 201 response payload typically describes and links to the
+   * resource(s) created.  See Section 7.2 for a discussion of the meaning
+   * and purpose of validator header fields, such as ETag and 
+   * Last-Modified, in a 201 response.
+   *
+   * @returns 201
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.3.2
+   */
   CREATED: 201,
   ACCEPTED: 202,
   NON_AUTHORITATIVE_INFORMATION: 203,
@@ -105,7 +161,7 @@ exports.statusCode = {
   /**
    * @deprecated
    * The 305 (Use Proxy) status code was defined in a previous version of
-   * this specification and is now deprecated (Appendix B).
+   * this specification and is now deprecated.
    * @returns 305
    */
   USE_PROXY: 305,
@@ -139,4 +195,4 @@ exports.statusCode = {
   HTTP_VERSION_NOT_SUPPORTED: 505,
 };
 
-const code = this.statusCode.SWITCHING_PROTOCOLS;
+const code = this.statusCode.CREATED;
