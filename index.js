@@ -150,25 +150,85 @@ exports.statusCode = {
 
   /**
    * The 202 (Accepted) status code indicates that the request has been
-   accepted for processing, but the processing has not been completed.
-   The request might or might not eventually be acted upon, as it might
-   be disallowed when processing actually takes place.  There is no
-   facility in HTTP for re-sending a status code from an asynchronous
-   operation.
-
-   The 202 response is intentionally noncommittal.  Its purpose is to
-   allow a server to accept a request for some other process (perhaps a
-   batch-oriented process that is only run once per day) without
-   requiring that the user agent's connection to the server persist
-   until the process is completed.  The representation sent with this
-   response ought to describe the request's current status and point to
-   (or embed) a status monitor that can provide the user with an
-   estimate of when the request will be fulfilled.
+   * accepted for processing, but the processing has not been completed.
+   * The request might or might not eventually be acted upon, as it might
+   * be disallowed when processing actually takes place.  There is no
+   * facility in HTTP for re-sending a status code from an asynchronous
+   * operation.
+   *
+   * The 202 response is intentionally noncommittal.  Its purpose is to
+   * allow a server to accept a request for some other process (perhaps a
+   * batch-oriented process that is only run once per day) without
+   * requiring that the user agent's connection to the server persist
+   * until the process is completed.  The representation sent with this
+   * response ought to describe the request's current status and point to
+   * (or embed) a status monitor that can provide the user with an
+   * estimate of when the request will be fulfilled.
+   *
    * @returns 202
    * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.3.3
    */
   ACCEPTED: 202,
+
+  /**
+   * The 203 (Non-Authoritative Information) status code indicates that
+   * the request was successful but the enclosed payload has been modified
+   * from that of the origin server's 200 (OK) response by a transforming
+   * proxy (Section 5.7.2 of [RFC7230] https://datatracker.ietf.org/doc/html/rfc7230#section-5.7.2).
+   * This status code allows the proxy to notify recipients when a transformation
+   * has been applied, since that knowledge might impact later decisions regarding
+   * the content.  For example, future cache validation requests for the
+   * content might only be applicable along the same request path (through the same proxies).
+   *
+   * The 203 response is similar to the Warning code of 214 Transformation
+   * Applied (Section 5.5 of [RFC7234] https://datatracker.ietf.org/doc/html/rfc7234#section-5.5), which has the advantage of being
+   * applicable to responses with any status code.
+   *
+   *  A 203 response is cacheable by default; i.e., unless otherwise
+   * indicated by the method definition or explicit cache controls (see
+   * Section 4.2.2 of [RFC7234] https://datatracker.ietf.org/doc/html/rfc7234#section-4.2.2).
+   *
+   * @returns 203
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.3.4
+   */
   NON_AUTHORITATIVE_INFORMATION: 203,
+
+  /**
+   * The 204 (No Content) status code indicates that the server has
+   * successfully fulfilled the request and that there is no additional
+   * content to send in the response payload body.  Metadata in the
+   * response header fields refer to the target resource and its selected
+   * representation after the requested action was applied.
+   *
+   * For example, if a 204 status code is received in response to a PUT
+   * request and the response contains an ETag header field, then the PUT
+   * was successful and the ETag field-value contains the entity-tag for
+   * the new representation of that target resource.
+   *
+   * The 204 response allows a server to indicate that the action has been
+   * successfully applied to the target resource, while implying that the
+   * user agent does not need to traverse away from its current "document
+   * view" (if any).  The server assumes that the user agent will provide
+   * some indication of the success to its user, in accord with its own
+   * interface, and apply any new or updated metadata in the response to
+   * its active representation.
+   *
+   * For example, a 204 status code is commonly used with document editing
+   * interfaces corresponding to a "save" action, such that the document
+   * being saved remains available to the user for editing.  It is also
+   * frequently used with interfaces that expect automated data transfers
+   * to be prevalent, such as within distributed version control systems.
+   *
+   * A 204 response is terminated by the first empty line after the header
+   * fields because it cannot contain a message body.
+   *
+   * A 204 response is cacheable by default; i.e., unless otherwise
+   * indicated by the method definition or explicit cache controls (see
+   * Section 4.2.2 of [RFC7234] https://datatracker.ietf.org/doc/html/rfc7234#section-4.2.2 ).
+   *
+   * @returns 204
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.3.5
+   */
   NO_CONTENT: 204,
   RESET_CONTENT: 205,
   PARTIAL_CONTENT: 206,
@@ -215,4 +275,4 @@ exports.statusCode = {
   HTTP_VERSION_NOT_SUPPORTED: 505,
 };
 
-const code = this.statusCode.ACCEPTED;
+const code = this.statusCode.NO_CONTENT;
