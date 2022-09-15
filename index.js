@@ -63,8 +63,31 @@ exports.statusCode = {
    * request has been received and has not yet been rejected by the
    * server.  The server intends to send a final response after the
    * request has been fully received and acted upon.
+   *
+   * When the request contains an Expect header field that includes a
+   * 100-continue expectation, the 100 response indicates that the server
+   * wishes to receive the request payload body.
+   *
+   * The client ought to continue sending the request and discard the 100 response.
+   * If the request did not contain an Expect header field containing the
+   * 100-continue expectation, the client can simply discard this interim
+   * response.
+   *
+   * @returns 100
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.2.1
    */
   CONTINUE: 100,
+
+  /**
+   * The 101 (Switching Protocols) status code indicates that the server
+   * understands and is willing to comply with the client's request, via
+   * the Upgrade header field, for a change in the application protocol 
+   * being used on this connection.  The server MUST generate an Upgrade 
+   * header field in the response that indicates which protocol(s) will be 
+   * switched to immediately after the empty line that terminates the 101 response.
+   * @returns 101
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.2.2
+   */
   SWITCHING_PROTOCOLS: 101,
   OK: 200,
   CREATED: 201,
@@ -87,7 +110,7 @@ exports.statusCode = {
    */
   USE_PROXY: 305,
   TEMPORARY_REDIRECT: 307,
-  
+
   BAD_REQUEST: 400,
   UNAUTHORIZED: 401,
   PAYMENT_REQUIRE: 402,
@@ -113,8 +136,7 @@ exports.statusCode = {
   BAD_GATEWAY: 502,
   SERVICE_UNAVAILABLE: 503,
   GATEWAY_TIMEOUT: 504,
-  HTTP_VERSION_NOT_SUPPORTED: 505
-
+  HTTP_VERSION_NOT_SUPPORTED: 505,
 };
 
-const code = this.statusCode.USE_PROXY;
+const code = this.statusCode.SWITCHING_PROTOCOLS;
