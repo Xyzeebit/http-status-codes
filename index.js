@@ -137,16 +137,36 @@ exports.statusCode = {
    * created.  The primary resource created by the request is identified
    * by either a Location header field in the response or, if no Location
    * field is received, by the effective request URI.
-   * 
+   *
    * The 201 response payload typically describes and links to the
    * resource(s) created.  See Section 7.2 for a discussion of the meaning
-   * and purpose of validator header fields, such as ETag and 
+   * and purpose of validator header fields, such as ETag and
    * Last-Modified, in a 201 response.
    *
    * @returns 201
    * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.3.2
    */
   CREATED: 201,
+
+  /**
+   * The 202 (Accepted) status code indicates that the request has been
+   accepted for processing, but the processing has not been completed.
+   The request might or might not eventually be acted upon, as it might
+   be disallowed when processing actually takes place.  There is no
+   facility in HTTP for re-sending a status code from an asynchronous
+   operation.
+
+   The 202 response is intentionally noncommittal.  Its purpose is to
+   allow a server to accept a request for some other process (perhaps a
+   batch-oriented process that is only run once per day) without
+   requiring that the user agent's connection to the server persist
+   until the process is completed.  The representation sent with this
+   response ought to describe the request's current status and point to
+   (or embed) a status monitor that can provide the user with an
+   estimate of when the request will be fulfilled.
+   * @returns 202
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.3.3
+   */
   ACCEPTED: 202,
   NON_AUTHORITATIVE_INFORMATION: 203,
   NO_CONTENT: 204,
@@ -195,4 +215,4 @@ exports.statusCode = {
   HTTP_VERSION_NOT_SUPPORTED: 505,
 };
 
-const code = this.statusCode.CREATED;
+const code = this.statusCode.ACCEPTED;
