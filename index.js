@@ -230,13 +230,174 @@ exports.statusCode = {
    * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.3.5
    */
   NO_CONTENT: 204,
+
+  /**
+   * The 205 (Reset Content) status code indicates that the server has
+   * fulfilled the request and desires that the user agent reset the
+   * "document view", which caused the request to be sent, to its original
+   * state as received from the origin server.
+   *
+   * This response is intended to support a common data entry use case
+   * where the user receives content that supports data entry (a form,
+   * notepad, canvas, etc.), enters or manipulates data in that space,
+   * causes the entered data to be submitted in a request, and then the
+   * data entry mechanism is reset for the next entry so that the user can
+   * easily initiate another input action.
+   *
+   * Since the 205 status code implies that no additional content will be
+   * provided, a server MUST NOT generate a payload in a 205 response.  In
+   * other words, a server MUST do one of the following for a 205
+   * response: a) indicate a zero-length body for the response by
+   * including a Content-Length header field with a value of 0; b)
+   * indicate a zero-length payload for the response by including a
+   * Transfer-Encoding header field with a value of chunked and a message
+   * body consisting of a single chunk of zero-length; or, c) close the
+   * connection immediately after sending the blank line terminating the
+   * header section.
+   * @returns 205
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.3.6
+   */
   RESET_CONTENT: 205,
+
+  /**
+   * This response code is used when the Range header is sent from the
+   * client to request only part of a resource.
+   * @returns 206
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/206
+   */
   PARTIAL_CONTENT: 206,
 
+  /**
+   * The 300 (Multiple Choices) status code indicates that the target
+   * resource has more than one representation, each with its own more
+   * specific identifier, and information about the alternatives is being
+   * provided so that the user (or user agent) can select a preferred
+   * representation by redirecting its request to one or more of those
+   * identifiers.  In other words, the server desires that the user agent
+   * engage in reactive negotiation to select the most appropriate
+   * representation(s) for its needs 
+   * (Section 3.4 https://datatracker.ietf.org/doc/html/rfc7231#section-3.4). 
+   * If the server has a preferred choice, the server SHOULD generate a
+   * Location header field containing a preferred choice's URI reference.
+   * The user agent MAY use the Location field value for automatic
+   * redirection.
+   * 
+   * For request methods other than HEAD, the server SHOULD generate a
+   * payload in the 300 response containing a list of representation
+   * metadata and URI reference(s) from which the user or user agent can
+   * choose the one most preferred.  The user agent MAY make a selection
+   * from that list automatically if it understands the provided media
+   * type.  A specific format for automatic selection is not defined by
+   * this specification because HTTP tries to remain orthogonal to the
+   * definition of its payloads.  In practice, the representation is
+   * provided in some easily parsed format believed to be acceptable to
+   * the user agent, as determined by shared design or content
+   * negotiation, or in some commonly accepted hypertext format.
+   * 
+   * A 300 response is cacheable by default; i.e., unless otherwise
+   * indicated by the method definition or explicit cache controls (see
+   * Section 4.2.2 of [RFC7234] https://datatracker.ietf.org/doc/html/rfc7234#section-4.2.2).
+
+   * @returns 300
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.4.1
+   */
   MULTIPLE_CHOICES: 300,
+
+  /**
+   * The 301 (Moved Permanently) status code indicates that the target
+   * resource has been assigned a new permanent URI and any future
+   * references to this resource ought to use one of the enclosed URIs.
+   * Clients with link-editing capabilities ought to automatically re-link
+   * references to the effective request URI to one or more of the new
+   * references sent by the server, where possible.
+   *
+   * The server SHOULD generate a Location header field in the response
+   * containing a preferred URI reference for the new permanent URI.  The
+   * user agent MAY use the Location field value for automatic
+   * redirection.  The server's response payload usually contains a short
+   * hypertext note with a hyperlink to the new URI(s).
+   *
+   *  Note: For historical reasons, a user agent MAY change the request
+   *  method from POST to GET for the subsequent request.  If this
+   *  behavior is undesired, the 307 (Temporary Redirect) status code
+   *  can be used instead.
+   *
+   * A 301 response is cacheable by default; i.e., unless otherwise
+   * indicated by the method definition or explicit cache controls (see
+   * Section 4.2.2 of [RFC7234] https://datatracker.ietf.org/doc/html/rfc7234#section-4.2.2).
+   * @returns 301
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.4.2
+   */
   MOVED_PERMANENTLY: 301,
+
+  /**
+   * The 302 (Found) status code indicates that the target resource
+   * resides temporarily under a different URI.  Since the redirection
+   * might be altered on occasion, the client ought to continue to use the
+   * effective request URI for future requests.
+   *
+   * The server SHOULD generate a Location header field in the response
+   * containing a URI reference for the different URI.  The user agent MAY
+   * use the Location field value for automatic redirection.  The server's
+   * response payload usually contains a short hypertext note with a
+   * hyperlink to the different URI(s).
+   *
+   * Note: For historical reasons, a user agent MAY change the request
+   * method from POST to GET for the subsequent request.  If this
+   * behavior is undesired, the 307 (Temporary Redirect) status code
+   * can be used instead.
+   *
+   * @returns 302
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.4.3
+   */
   FOUND: 302,
+
+  /**
+   *  The 303 (See Other) status code indicates that the server is
+   * redirecting the user agent to a different resource, as indicated by a
+   * URI in the Location header field, which is intended to provide an
+   * indirect response to the original request.  A user agent can perform
+   * a retrieval request targeting that URI (a GET or HEAD request if
+   * using HTTP), which might also be redirected, and present the eventual
+   * result as an answer to the original request.  Note that the new URI
+   * in the Location header field is not considered equivalent to the
+   * effective request URI.
+   *
+   * This status code is applicable to any HTTP method.  It is primarily
+   * used to allow the output of a POST action to redirect the user agent
+   * to a selected resource, since doing so provides the information
+   * corresponding to the POST response in a form that can be separately
+   * identified, bookmarked, and cached, independent of the original
+   * request.
+   *
+   * A 303 response to a GET request indicates that the origin server does
+   * not have a representation of the target resource that can be
+   * transferred by the server over HTTP.  However, the Location field
+   * value refers to a resource that is descriptive of the target
+   * resource, such that making a retrieval request on that other resource
+   * might result in a representation that is useful to recipients without
+   * implying that it represents the original target resource.  Note that
+   * answers to the questions of what can be represented, what
+   * representations are adequate, and what might be a useful description
+   * are outside the scope of HTTP.
+   *
+   * Except for responses to a HEAD request, the representation of a 303
+   * response ought to contain a short hypertext note with a hyperlink to
+   * the same URI reference provided in the Location header field.
+   *
+   * @returns 303
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.4.4
+   */
   SEE_OTHER: 303,
+
+  /**
+   * This is used for caching purposes. It tells the client that the response has
+   * not been modified, so the client can continue to use the same cached version
+   * of the response.
+   *
+   * @returns 304
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/304
+   */
   NOT_MODIFIED: 304,
   /**
    * @deprecated
@@ -245,7 +406,51 @@ exports.statusCode = {
    * @returns 305
    */
   USE_PROXY: 305,
+
+  /**
+   * This response code is no longer used; it is just reserved. It was used
+   * in a previous version of the HTTP/1.1 specification.
+   * @reserved
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.4.6
+   */
+  UNUSED: 306,
+
+  /**
+   * The 307 (Temporary Redirect) status code indicates that the target
+   * resource resides temporarily under a different URI and the user agent
+   * MUST NOT change the request method if it performs an automatic
+   * redirection to that URI.  Since the redirection can change over time,
+   * the client ought to continue using the original effective request URI
+   * for future requests.
+   *
+   * The server SHOULD generate a Location header field in the response
+   * containing a URI reference for the different URI.  The user agent MAY
+   * use the Location field value for automatic redirection.  The server's
+   * response payload usually contains a short hypertext note with a
+   * hyperlink to the different URI(s).
+   *
+   * Note: This status code is similar to 302 (Found), except that it
+   * does not allow changing the request method from POST to GET.  This
+   * specification defines no equivalent counterpart for 301 (Moved
+   * Permanently) ([RFC7238] https://datatracker.ietf.org/doc/html/rfc7238, however, defines the status code 308
+   * (Permanent Redirect) for this purpose).
+   *
+   * @returns 307
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.4.7
+   */
   TEMPORARY_REDIRECT: 307,
+
+  /**
+   * The server sends this response to direct the client to get the requested 
+   * resource at another URI with same method that was used in the prior 
+   * request. This has the same semantics as the 302 Found HTTP response code, 
+   * with the exception that the user agent must not change the HTTP method used: 
+   * if a POST was used in the first request, a POST must be used in the second request.
+   * 
+   * @returns 308
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/308
+   */
+  PERMANENT_REDIRECT: 308,
 
   BAD_REQUEST: 400,
   UNAUTHORIZED: 401,
@@ -275,4 +480,4 @@ exports.statusCode = {
   HTTP_VERSION_NOT_SUPPORTED: 505,
 };
 
-const code = this.statusCode.NO_CONTENT;
+const code = this.statusCode.PERMANENT_REDIRECT;
