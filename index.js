@@ -7,6 +7,9 @@
  * 2xx (Successful): The request was successfully received,
  * understood, and accepted
  * 
+ * 3xx (Redirection): Further action needs to be taken in order to
+ * complete the request
+ * 
  * 4xx (Client Error): The request contains bad syntax or cannot be
  * fulfilled
  * 
@@ -399,6 +402,7 @@ exports.statusCode = {
    * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/304
    */
   NOT_MODIFIED: 304,
+
   /**
    * @deprecated
    * The 305 (Use Proxy) status code was defined in a previous version of
@@ -480,4 +484,4 @@ exports.statusCode = {
   HTTP_VERSION_NOT_SUPPORTED: 505,
 };
 
-const code = this.statusCode.PERMANENT_REDIRECT;
+const code = this.statusCode.USE_PROXY;
