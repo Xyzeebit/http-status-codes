@@ -736,28 +736,98 @@ exports.statusCode = {
    * protocol.  The server MUST send an Upgrade header field in a 426
    * response to indicate the required protocol(s) (Section 6.7 of
    * [RFC7230] https://datatracker.ietf.org/doc/html/rfc7230#section-6.7).
-   * 
+   *
    * Example:
-   * 
+   *
    * - HTTP/1.1 426 Upgrade Required
    * - Upgrade: HTTP/3.0
    * - Connection: Upgrade
    * - Content-Length: 53
    * - Content-Type: text/plain
-   * 
+   *
    * This service requires use of the HTTP/3.0 protocol.
-   * 
+   *
    * @returns 426
    * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.15
    */
   UPGRADE_REQUIRED: 426,
 
+  /**
+   * The 500 (Internal Server Error) status code indicates that the server
+   * encountered an unexpected condition that prevented it from fulfilling
+   * the request.
+   * @returns 500
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.6.1
+   */
   INTERNAL_SERVER_ERROR: 500,
+
+  /**
+   * The 501 (Not Implemented) status code indicates that the server does
+   * not support the functionality required to fulfill the request.  This
+   * is the appropriate response when the server does not recognize the
+   * request method and is not capable of supporting it for any resource.
+   *
+   * A 501 response is cacheable by default; i.e., unless otherwise
+   * indicated by the method definition or explicit cache controls (see
+   * Section 4.2.2 of [RFC7234] https://datatracker.ietf.org/doc/html/rfc7234#section-4.2.2).
+   *
+   * @returns 501
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.6.2
+   */
   NOT_IMPLEMENTED: 501,
+
+  /**
+   * The 502 (Bad Gateway) status code indicates that the server, while
+   * acting as a gateway or proxy, received an invalid response from an
+   * inbound server it accessed while attempting to fulfill the request.
+   * @returns 502
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.6.3
+   */
   BAD_GATEWAY: 502,
+
+  /**
+   * The 503 (Service Unavailable) status code indicates that the server
+   * is currently unable to handle the request due to a temporary overload
+   * or scheduled maintenance, which will likely be alleviated after some
+   * delay.  The server MAY send a Retry-After header field
+   * (Section 7.1.3 https://datatracker.ietf.org/doc/html/rfc7231#section-7.1.3)
+   * to suggest an appropriate amount of time for the client to wait before retrying
+   * the request.
+   *
+   * - Note: The existence of the 503 status code does not imply that a
+   * server has to use it when becoming overloaded.  Some servers might
+   * simply refuse the connection.
+   * @returns 503
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.6.4
+   */
   SERVICE_UNAVAILABLE: 503,
+
+  /**
+   * The 504 (Gateway Timeout) status code indicates that the server,
+   * while acting as a gateway or proxy, did not receive a timely response
+   * from an upstream server it needed to access in order to complete the
+   * request.
+   * @returns 504
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.6.5
+   */
   GATEWAY_TIMEOUT: 504,
+
+  /**
+   * The 505 (HTTP Version Not Supported) status code indicates that the
+   * server does not support, or refuses to support, the major version of
+   * HTTP that was used in the request message.  The server is indicating
+   * that it is unable or unwilling to complete the request using the same
+   * major version as the client, as described in Section 2.6 of
+   * [RFC7230] https://datatracker.ietf.org/doc/html/rfc7230#section-2.6, 
+   * other than with this error message.  The server SHOULD
+   * generate a representation for the 505 response that describes why
+   * that version is not supported and what other protocols are supported
+   * by that server.
+   * 
+   * @returns 505
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.6.6
+   */
   HTTP_VERSION_NOT_SUPPORTED: 505,
 };
 
-const code = this.statusCode.UPGRADE_REQUIRED;
+const code = this.statusCode.SERVICE_UNAVAILABLE;
