@@ -560,6 +560,7 @@ exports.statusCode = {
    * appropriate choice from that list.  However, this specification does
    * not define any standard for such automatic selection, as described in
    * Section 6.4.1. https://datatracker.ietf.org/doc/html/rfc7231#section-6.4.1
+   * 
    * @returns 406
    * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.6
    */
