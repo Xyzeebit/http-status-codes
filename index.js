@@ -641,12 +641,32 @@ exports.statusCode = {
    * The client MAY repeat the request if
    * it adds a valid Content-Length header field containing the length of
    * the message body in the request message.
-   * 
+   *
    * @returns 411
    * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.10
    */
   LENGTH_REQUIRED: 411,
+
+  /**
+   * The client has indicated preconditions in its headers which the server does not meet.
+   * @returns 412
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/412
+   */
   PRECONDITION_FAILED: 412,
+
+  /**
+   * The 413 (Payload Too Large) status code indicates that the server is
+   * refusing to process a request because the request payload is larger
+   * than the server is willing or able to process.  The server MAY close
+   * the connection to prevent the client from continuing the request.
+   * 
+   * If the condition is temporary, the server SHOULD generate a
+   * Retry-After header field to indicate that it is temporary and after
+   * what time the client MAY try again.
+   * 
+   * @returns 413
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.11
+   */
   PAYLOAD_TOO_LARGE: 413,
   URI_TOO_LONG: 414,
   UNSUPPORTED_MEDIA_TYPE: 415,
