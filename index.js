@@ -530,9 +530,39 @@ exports.statusCode = {
   NOT_FOUND: 404,
 
   /**
+   * The 405 (Method Not Allowed) status code indicates that the method
+   * received in the request-line is known by the origin server but not
+   * supported by the target resource.  The origin server MUST generate an
+   * Allow header field in a 405 response containing a list of the target
+   * resource's currently supported methods.
+   *
+   * A 405 response is cacheable by default; i.e., unless otherwise
+   * indicated by the method definition or explicit cache controls (see
+   * https://datatracker.ietf.org/doc/html/rfc7234#section-4.2.2).
+   *
    * @returns 405
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.5
    */
   METHOD_NOT_ALLOWED: 405,
+
+  /**
+   * The 406 (Not Acceptable) status code indicates that the target
+   * resource does not have a current representation that would be
+   * acceptable to the user agent, according to the proactive negotiation
+   * header fields received in the request (Section 5.3) 
+   * https://datatracker.ietf.org/doc/html/rfc7231#section-5.3, and 
+   * the server is unwilling to supply a default representation.
+   *
+   * The server SHOULD generate a payload containing a list of available
+   * representation characteristics and corresponding resource identifiers
+   * from which the user or user agent can choose the one most
+   * appropriate.  A user agent MAY automatically select the most
+   * appropriate choice from that list.  However, this specification does
+   * not define any standard for such automatic selection, as described in
+   * Section 6.4.1. https://datatracker.ietf.org/doc/html/rfc7231#section-6.4.1
+   * @returns 406
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.6
+   */
   NOT_ACCEPTED: 406,
   PROXY_AUTHENTICATION_REQUIRED: 407,
   REQUEST_TIMEOUT: 408,
