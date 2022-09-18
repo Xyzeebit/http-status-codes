@@ -1,4 +1,5 @@
 /**
+ * http-rest-codes, http-response-codes, http-sc, http-statuses
  * The status-code element is a three-digit integer code giving the 
  * result of the attempt to understand and satisfy the request.
  * 
@@ -445,22 +446,92 @@ exports.statusCode = {
   TEMPORARY_REDIRECT: 307,
 
   /**
-   * The server sends this response to direct the client to get the requested 
-   * resource at another URI with same method that was used in the prior 
-   * request. This has the same semantics as the 302 Found HTTP response code, 
-   * with the exception that the user agent must not change the HTTP method used: 
+   * The server sends this response to direct the client to get the requested
+   * resource at another URI with same method that was used in the prior
+   * request. This has the same semantics as the 302 Found HTTP response code,
+   * with the exception that the user agent must not change the HTTP method used:
    * if a POST was used in the first request, a POST must be used in the second request.
-   * 
+   *
    * @returns 308
    * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/308
    */
   PERMANENT_REDIRECT: 308,
 
+  /**
+   * The 400 (Bad Request) status code indicates that the server cannot or
+   * will not process the request due to something that is perceived to be
+   * a client error (e.g., malformed request syntax, invalid request
+   * message framing, or deceptive request routing).
+   *
+   * @returns 400
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.1
+   */
   BAD_REQUEST: 400,
+
+  /**
+   * Although the HTTP standard specifies "unauthorized", semantically this
+   * response means "unauthenticated". That is, the client must authenticate
+   * itself to get the requested response.
+   *
+   * @returns 401
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+   */
   UNAUTHORIZED: 401,
+
+  /**
+   * The 402 (Payment Required) status code is reserved for future use.
+   *
+   * The initial aim for creating this code was using it for digital payment
+   * systems, however this status code is used very rarely and no standard
+   * convention exists. https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/402
+   * @returns 402
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.2
+   */
   PAYMENT_REQUIRE: 402,
+
+  /**
+   * The 403 (Forbidden) status code indicates that the server understood
+   * the request but refuses to authorize it.  A server that wishes to
+   * make public why the request has been forbidden can describe that
+   * reason in the response payload (if any).
+   *
+   * If authentication credentials were provided in the request, the
+   * server considers them insufficient to grant access.  The client
+   * SHOULD NOT automatically repeat the request with the same
+   * credentials.  The client MAY repeat the request with new or different
+   * credentials.  However, a request might be forbidden for reasons
+   * unrelated to the credentials.
+   *
+   * An origin server that wishes to "hide" the current existence of a
+   * forbidden target resource MAY instead respond with a status code of
+   * 404 (Not Found).
+   *
+   * @returns 403
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.3
+   */
   FORBIDDEN: 403,
+
+  /**
+   * The 404 (Not Found) status code indicates that the origin server did
+   * not find a current representation for the target resource or is not
+   * willing to disclose that one exists.  A 404 status code does not
+   * indicate whether this lack of representation is temporary or
+   * permanent; the 410 (Gone) status code is preferred over 404 if the
+   * origin server knows, presumably through some configurable means, that
+   * the condition is likely to be permanent.
+   *
+   * A 404 response is cacheable by default; i.e., unless otherwise
+   * indicated by the method definition or explicit cache controls
+   * https://datatracker.ietf.org/doc/html/rfc7234#section-4.2.2
+   *
+   * @returns 404
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.4
+   */
   NOT_FOUND: 404,
+
+  /**
+   * @returns 405
+   */
   METHOD_NOT_ALLOWED: 405,
   NOT_ACCEPTED: 406,
   PROXY_AUTHENTICATION_REQUIRED: 407,
