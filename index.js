@@ -549,8 +549,8 @@ exports.statusCode = {
    * The 406 (Not Acceptable) status code indicates that the target
    * resource does not have a current representation that would be
    * acceptable to the user agent, according to the proactive negotiation
-   * header fields received in the request (Section 5.3) 
-   * https://datatracker.ietf.org/doc/html/rfc7231#section-5.3, and 
+   * header fields received in the request (Section 5.3)
+   * https://datatracker.ietf.org/doc/html/rfc7231#section-5.3, and
    * the server is unwilling to supply a default representation.
    *
    * The server SHOULD generate a payload containing a list of available
@@ -560,15 +560,91 @@ exports.statusCode = {
    * appropriate choice from that list.  However, this specification does
    * not define any standard for such automatic selection, as described in
    * Section 6.4.1. https://datatracker.ietf.org/doc/html/rfc7231#section-6.4.1
-   * 
+   *
    * @returns 406
    * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.6
    */
   NOT_ACCEPTED: 406,
+
+  /**
+   * This is similar to 401 Unauthorized but authentication is needed to be done by a proxy.
+   * @returns 407
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/407
+   */
   PROXY_AUTHENTICATION_REQUIRED: 407,
+
+  /**
+   * The 408 (Request Timeout) status code indicates that the server did
+   * not receive a complete request message within the time that it was
+   * prepared to wait.  A server SHOULD send the "close" connection option
+   * (Section 6.1 of [RFC7230])https://datatracker.ietf.org/doc/html/rfc7230#section-6.1
+   * in the response, since 408 implies that the server has decided to close the
+   * connection rather than continue waiting.  If the client has an outstanding
+   * request in transit, the client MAY repeat that request on a new connection.
+   *
+   * @returns 408
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.7
+   */
   REQUEST_TIMEOUT: 408,
+
+  /**
+   * The 409 (Conflict) status code indicates that the request could not
+   * be completed due to a conflict with the current state of the target
+   * resource.  This code is used in situations where the user might be
+   * able to resolve the conflict and resubmit the request.  The server
+   * SHOULD generate a payload that includes enough information for a user
+   * to recognize the source of the conflict.
+   *
+   * Conflicts are most likely to occur in response to a PUT request.  For
+   * example, if versioning were being used and the representation being
+   * PUT included changes to a resource that conflict with those made by
+   * an earlier (third-party) request, the origin server might use a 409
+   * response to indicate that it can't complete the request.  In this
+   * case, the response representation would likely contain information
+   * useful for merging the differences based on the revision history.
+   *
+   * @returns 409
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.8
+   */
   CONFLICT: 409,
+
+  /**
+   * The 410 (Gone) status code indicates that access to the target
+   * resource is no longer available at the origin server and that this
+   * condition is likely to be permanent.  If the origin server does not
+   * know, or has no facility to determine, whether or not the condition
+   * is permanent, the status code 404 (Not Found) ought to be used instead.
+   *
+   * The 410 response is primarily intended to assist the task of web
+   * maintenance by notifying the recipient that the resource is
+   * intentionally unavailable and that the server owners desire that
+   * remote links to that resource be removed.  Such an event is common
+   * for limited-time, promotional services and for resources belonging to
+   * individuals no longer associated with the origin server's site.  It
+   * is not necessary to mark all permanently unavailable resources as
+   * "gone" or to keep the mark for any length of time -- that is left to
+   * the discretion of the server owner.
+   *
+   * A 410 response is cacheable by default; i.e., unless otherwise
+   * indicated by the method definition or explicit cache controls (see
+   * Section 4.2.2 of [RFC7234] https://datatracker.ietf.org/doc/html/rfc7234#section-4.2.2).
+   *
+   * @returns 410
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.9
+   */
   GONE: 410,
+
+  /**
+   * The 411 (Length Required) status code indicates that the server
+   * refuses to accept the request without a defined Content-Length
+   * (Section 3.3.2 of [RFC7230] https://datatracker.ietf.org/doc/html/rfc7230#section-3.3.2).
+   * The client MAY repeat the request if
+   * it adds a valid Content-Length header field containing the length of
+   * the message body in the request message.
+   * 
+   * @returns 411
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.10
+   */
   LENGTH_REQUIRED: 411,
   PRECONDITION_FAILED: 412,
   PAYLOAD_TOO_LARGE: 413,
@@ -586,4 +662,4 @@ exports.statusCode = {
   HTTP_VERSION_NOT_SUPPORTED: 505,
 };
 
-const code = this.statusCode.USE_PROXY;
+const code = this.statusCode.NOT_ACCEPTED;
