@@ -659,20 +659,98 @@ exports.statusCode = {
    * refusing to process a request because the request payload is larger
    * than the server is willing or able to process.  The server MAY close
    * the connection to prevent the client from continuing the request.
-   * 
+   *
    * If the condition is temporary, the server SHOULD generate a
    * Retry-After header field to indicate that it is temporary and after
    * what time the client MAY try again.
-   * 
+   *
    * @returns 413
    * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.11
    */
   PAYLOAD_TOO_LARGE: 413,
+
+  /**
+   * The 414 (URI Too Long) status code indicates that the server is
+   * refusing to service the request because the request-target (Section
+   * 5.3 of [RFC7230] https://datatracker.ietf.org/doc/html/rfc7230#section-5.3) 
+   * is longer than the server is willing to interpret.
+   * This rare condition is only likely to occur when a client has
+   * improperly converted a POST request to a GET request with long query
+   * information, when the client has descended into a "black hole" of
+   * redirection (e.g., a redirected URI prefix that points to a suffix of
+   * itself) or when the server is under attack by a client attempting to
+   * exploit potential security holes.
+   * 
+   * A 414 response is cacheable by default; i.e., unless otherwise
+   * indicated by the method definition or explicit cache controls (see
+   * Section 4.2.2 of [RFC7234] https://datatracker.ietf.org/doc/html/rfc7234#section-4.2.2).
+
+   * @returns 414
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.12
+   */
   URI_TOO_LONG: 414,
+
+  /**
+   * The 415 (Unsupported Media Type) status code indicates that the
+   * origin server is refusing to service the request because the payload
+   * is in a format not supported by this method on the target resource.
+   * The format problem might be due to the request's indicated
+   * Content-Type or Content-Encoding, or as a result of inspecting the
+   * data directly.
+   *
+   * @returns 415
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.13
+   */
   UNSUPPORTED_MEDIA_TYPE: 415,
+
+  /**
+   * The range specified by the Range header field in the request cannot be fulfilled.
+   * It's possible that the range is outside the size of the target URI's data.
+   * @returns 416
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/416
+   */
   RANGE_NOT_SATISFIABLE: 416,
+
+  /**
+   * The 417 (Expectation Failed) status code indicates that the
+   * expectation given in the request's Expect header field
+   * (Section 5.1.1 https://datatracker.ietf.org/doc/html/rfc7231#section-5.1.1)
+   * could not be met by at least one of the inbound servers.
+   *
+   * @returns 417
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.14
+   */
   EXPECTATION_FAILED: 417,
-  UPGRADE_REQUIRED: 418,
+
+  /**
+   * The server refuses the attempt to brew coffee with a teapot.
+   * @returns 418
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/418
+   */
+  IM_A_TEAPOT: 418,
+
+  /**
+   * The 426 (Upgrade Required) status code indicates that the server
+   * refuses to perform the request using the current protocol but might
+   * be willing to do so after the client upgrades to a different
+   * protocol.  The server MUST send an Upgrade header field in a 426
+   * response to indicate the required protocol(s) (Section 6.7 of
+   * [RFC7230] https://datatracker.ietf.org/doc/html/rfc7230#section-6.7).
+   * 
+   * Example:
+   * 
+   * - HTTP/1.1 426 Upgrade Required
+   * - Upgrade: HTTP/3.0
+   * - Connection: Upgrade
+   * - Content-Length: 53
+   * - Content-Type: text/plain
+   * 
+   * This service requires use of the HTTP/3.0 protocol.
+   * 
+   * @returns 426
+   * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.15
+   */
+  UPGRADE_REQUIRED: 426,
 
   INTERNAL_SERVER_ERROR: 500,
   NOT_IMPLEMENTED: 501,
@@ -682,4 +760,4 @@ exports.statusCode = {
   HTTP_VERSION_NOT_SUPPORTED: 505,
 };
 
-const code = this.statusCode.NOT_ACCEPTED;
+const code = this.statusCode.UPGRADE_REQUIRED;
