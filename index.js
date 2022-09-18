@@ -819,10 +819,11 @@ exports.statusCode = {
    * that it is unable or unwilling to complete the request using the same
    * major version as the client, as described in Section 2.6 of
    * [RFC7230] https://datatracker.ietf.org/doc/html/rfc7230#section-2.6, 
-   * other than with this error message.  The server SHOULD
-   * generate a representation for the 505 response that describes why
-   * that version is not supported and what other protocols are supported
-   * by that server.
+   * other than with this error message.  
+   * 
+   * The server SHOULD generate a representation for the 505 response that 
+   * describes why that version is not supported and what other protocols 
+   * are supported by that server.
    * 
    * @returns 505
    * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.6.6
@@ -830,4 +831,4 @@ exports.statusCode = {
   HTTP_VERSION_NOT_SUPPORTED: 505,
 };
 
-const code = this.statusCode.SERVICE_UNAVAILABLE;
+const code = this.statusCode.HTTP_VERSION_NOT_SUPPORTED;
