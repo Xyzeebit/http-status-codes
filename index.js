@@ -51,7 +51,8 @@
    | 415  | Unsupported Media Type        
    | 416  | Range Not Satisfiable         
    | 417  | Expectation Failed            
-   | 426  | Upgrade Required              
+   | 426  | Upgrade Required    
+   | 429  | Too Many Request          
    | 500  | Internal Server Error         
    | 501  | Not Implemented               
    | 502  | Bad Gateway                   
@@ -753,6 +754,29 @@ exports.statusCode = {
   UPGRADE_REQUIRED: 426,
 
   /**
+   * The user has sent too many requests in a given amount of time ("rate limiting").
+   * @returns 429
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429
+   */
+  TOO_MANY_REQUEST: 429,
+
+  /**
+   * The server is unwilling to process the request because its header fields are too large.
+   * The request may be resubmitted after reducing the size of the request header fields.
+   * @returns 431
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/431
+   */
+  REQUEST_HEADER_FIELDS_TOO_LARGE: 431,
+
+  /**
+   * The user agent requested a resource that cannot legally be provided, such as a 
+   * web page censored by a government.
+   * @returns 451
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/451
+   */
+  UNAVAILABLE_FOR_LEGAL_REASONS: 451,
+
+  /**
    * The 500 (Internal Server Error) status code indicates that the server
    * encountered an unexpected condition that prevented it from fulfilling
    * the request.
@@ -818,13 +842,13 @@ exports.statusCode = {
    * HTTP that was used in the request message.  The server is indicating
    * that it is unable or unwilling to complete the request using the same
    * major version as the client, as described in Section 2.6 of
-   * [RFC7230] https://datatracker.ietf.org/doc/html/rfc7230#section-2.6, 
-   * other than with this error message.  
-   * 
-   * The server SHOULD generate a representation for the 505 response that 
-   * describes why that version is not supported and what other protocols 
+   * [RFC7230] https://datatracker.ietf.org/doc/html/rfc7230#section-2.6,
+   * other than with this error message.
+   *
+   * The server SHOULD generate a representation for the 505 response that
+   * describes why that version is not supported and what other protocols
    * are supported by that server.
-   * 
+   *
    * @returns 505
    * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6.6.6
    */
