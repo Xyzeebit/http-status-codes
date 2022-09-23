@@ -52,7 +52,8 @@
    | 416  | Range Not Satisfiable         
    | 417  | Expectation Failed            
    | 426  | Upgrade Required    
-   | 429  | Too Many Request          
+   | 429  | Too Many Request    
+   | 451  | Unavailable for Legal Reasons
    | 500  | Internal Server Error         
    | 501  | Not Implemented               
    | 502  | Bad Gateway                   
@@ -62,7 +63,7 @@
    
  */
 
-exports.statusCode = {
+const statusCodes = {
   /**
    * The 100 (Continue) status code indicates that the initial part of a
    * request has been received and has not yet been rejected by the
@@ -855,4 +856,4 @@ exports.statusCode = {
   HTTP_VERSION_NOT_SUPPORTED: 505,
 };
 
-const code = this.statusCode.HTTP_VERSION_NOT_SUPPORTED;
+module.exports = statusCodes;
