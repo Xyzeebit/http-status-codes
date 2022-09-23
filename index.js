@@ -40,7 +40,7 @@
    | 404  | Not Found                     
    | 405  | Method Not Allowed            
    | 406  | Not Acceptable                
-   | 407  | Proxy Authentication Required 
+   | 407  | Proxy Authentication Required                                
    | 408  | Request Timeout               
    | 409  | Conflict                      
    | 410  | Gone                          
@@ -51,9 +51,9 @@
    | 415  | Unsupported Media Type        
    | 416  | Range Not Satisfiable         
    | 417  | Expectation Failed            
-   | 426  | Upgrade Required    
-   | 429  | Too Many Request    
-   | 451  | Unavailable for Legal Reasons
+   | 426  | Upgrade Required                                     
+   | 429  | Too Many Request                                           
+   | 451  | Unavailable for Legal Reasons                              
    | 500  | Internal Server Error         
    | 501  | Not Implemented               
    | 502  | Bad Gateway                   
